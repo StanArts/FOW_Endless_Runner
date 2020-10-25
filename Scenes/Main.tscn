@@ -1,11 +1,14 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://pack.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/Cat.tscn" type="PackedScene" id=4]
-[ext_resource path="res://ground.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/GameOver.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ground.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Menus.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Menus.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/StartMenu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/GameOver.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.05905
@@ -90,7 +93,7 @@ offsets = PoolRealArray( 0, 0.993378 )
 colors = PoolColorArray( 0.768627, 0.0705882, 0.0705882, 1, 0.92549, 0.176471, 0.176471, 0.192157 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 156.065, 10 )
+extents = Vector2( 154, 10 )
 
 [sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
@@ -109,7 +112,6 @@ shader_param/speed = 3.0
 script = ExtResource( 1 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 33.9272, 122.436 )
 script = ExtResource( 2 )
 
@@ -150,27 +152,44 @@ scale_amount_curve = SubResource( 4 )
 color_ramp = SubResource( 5 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 111.913, 140.084 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 8.087, 0.916 )
 shape = SubResource( 6 )
 
-[node name="Cat" parent="." instance=ExtResource( 4 )]
-position = Vector2( 270, 122.436 )
-
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Tree_Spawner" type="Timer" parent="."]
 autostart = true
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 material = SubResource( 8 )
-texture = ExtResource( 5 )
+position = Vector2( -12, -39 )
+scale = Vector2( 1.07885, 1.30769 )
+texture = ExtResource( 4 )
 polygon = PoolVector2Array( 0, 130, 260, 130, 260, 143, 0, 143 )
 
-[node name="GameOver" parent="." instance=ExtResource( 6 )]
+[node name="HUD" parent="." instance=ExtResource( 5 )]
+margin_left = 122.0
+margin_top = -4.0
+margin_right = 126.0
+margin_bottom = -4.0
+
+[node name="MenuLayer" parent="." instance=ExtResource( 6 )]
+editor/display_folded = true
+script = ExtResource( 7 )
+
+[node name="StartMenu" parent="MenuLayer" instance=ExtResource( 8 )]
+
+[node name="GameOver" parent="MenuLayer" instance=ExtResource( 9 )]
 visible = false
+
+[node name="Tween" type="Tween" parent="MenuLayer"]
 [connection signal="area_entered" from="Player/Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="button_down" from="GameOver/Button" to="." method="_on_Button_button_down"]
+[connection signal="timeout" from="Tree_Spawner" to="." method="_on_Tree_Spawner_timeout"]
+[connection signal="start_game" from="MenuLayer" to="." method="_on_MenuLayer_start_game"]
+[connection signal="button_down" from="MenuLayer/GameOver/Button" to="." method="_on_Button_button_down"]
 
-[editable path="GameOver"]
+[editable path="MenuLayer/GameOver"]

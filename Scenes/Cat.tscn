@@ -3,13 +3,14 @@
 [ext_resource path="res://pack.png" type="Texture" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 6.30854
+radius = 7.05128
 
 [node name="Cat" type="KinematicBody2D" groups=[
 "obstacles",
 ]]
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 1 )
 texture = ExtResource( 1 )
 flip_h = true
 region_enabled = true
