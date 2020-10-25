@@ -1,0 +1,19 @@
+[gd_scene format=2]
+
+[node name="GameOver" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 112.0
+margin_top = 64.0
+margin_right = 185.0
+margin_bottom = 78.0
+text = "Game Over"
+
+[node name="Button" type="Button" parent="."]
+margin_left = 112.0
+margin_top = 81.0
+margin_right = 189.0
+margin_bottom = 101.0
+text = "Play Again"
