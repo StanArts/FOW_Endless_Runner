@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Assets/Fonts/Retro Gaming.ttf"
@@ -14,8 +14,21 @@ font_path = "res://Assets/Fonts/Retro Gaming.ttf"
 size = 11
 font_data = SubResource( 3 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "blink"
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://Assets/Fonts/Retro Gaming.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 11
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://Assets/Fonts/Retro Gaming.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 11
+font_data = SubResource( 7 )
+
+[sub_resource type="Animation" id=9]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -35,23 +48,43 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Label" type="Label" parent="."]
-margin_left = 55.0
-margin_top = 37.0
-margin_right = 200.0
-margin_bottom = 65.0
+margin_left = 56.0
+margin_top = 16.0
+margin_right = 201.0
+margin_bottom = 44.0
 custom_fonts/font = SubResource( 2 )
 text = "Game Over"
 
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 88.0
+margin_top = 54.0
+margin_right = 168.0
+margin_bottom = 70.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "Score: 000"
+
+[node name="HighScoreLabel" type="Label" parent="."]
+margin_left = 92.0
+margin_top = 78.0
+margin_right = 184.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Best: 000"
+
 [node name="Button" type="Button" parent="."]
 modulate = Color( 1, 1, 1, 0.75 )
-margin_left = 81.0
-margin_top = 70.0
-margin_right = 169.0
-margin_bottom = 90.0
-custom_fonts/font = SubResource( 4 )
+margin_left = 80.0
+margin_top = 100.0
+margin_right = 168.0
+margin_bottom = 120.0
+custom_fonts/font = SubResource( 8 )
 text = "Play Again"
 flat = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Button"]
 autoplay = "blink"
-anims/blink = SubResource( 5 )
+anims/blink = SubResource( 9 )

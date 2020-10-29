@@ -1,14 +1,15 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://pack.png" type="Texture" id=3]
 [ext_resource path="res://ground.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Menus.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scripts/Menus.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/StartMenu.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/GameOver.tscn" type="PackedScene" id=9]
+[ext_resource path="res://HealthUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Menus.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/Menus.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/StartMenu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/GameOver.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.05905
@@ -176,13 +177,15 @@ margin_top = -4.0
 margin_right = 126.0
 margin_bottom = -4.0
 
-[node name="MenuLayer" parent="." instance=ExtResource( 6 )]
-editor/display_folded = true
-script = ExtResource( 7 )
+[node name="HealthUI" parent="." instance=ExtResource( 6 )]
+visible = false
 
-[node name="StartMenu" parent="MenuLayer" instance=ExtResource( 8 )]
+[node name="MenuLayer" parent="." instance=ExtResource( 7 )]
+script = ExtResource( 8 )
 
-[node name="GameOver" parent="MenuLayer" instance=ExtResource( 9 )]
+[node name="StartMenu" parent="MenuLayer" instance=ExtResource( 9 )]
+
+[node name="GameOver" parent="MenuLayer" instance=ExtResource( 10 )]
 visible = false
 
 [node name="Tween" type="Tween" parent="MenuLayer"]
@@ -190,6 +193,6 @@ visible = false
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Tree_Spawner" to="." method="_on_Tree_Spawner_timeout"]
 [connection signal="start_game" from="MenuLayer" to="." method="_on_MenuLayer_start_game"]
-[connection signal="button_down" from="MenuLayer/GameOver/Button" to="." method="_on_Button_button_down"]
+[connection signal="button_down" from="MenuLayer/GameOver/Button" to="MenuLayer" method="_on_Button_button_down"]
 
 [editable path="MenuLayer/GameOver"]

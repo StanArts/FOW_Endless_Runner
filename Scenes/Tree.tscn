@@ -3,12 +3,13 @@
 [ext_resource path="res://pack.png" type="Texture" id=1]
 
 [node name="Tree" type="KinematicBody2D" groups=[
-"decorations",
+"trees",
 ]]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -1.52588e-05, -27 )
-scale = Vector2( 2.71875, 2.71875 )
+modulate = Color( 1, 1, 1, 0.470588 )
+position = Vector2( -1.81899e-12, -57 )
+scale = Vector2( 3, 3 )
 z_index = -1
 texture = ExtResource( 1 )
 region_enabled = true
